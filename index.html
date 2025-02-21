@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <title>Online Classes - School Name</title>
+    <style>
+        /* Basic Reset */
+        .unifrakturmaguntia-regular {
+            font-family: "UnifrakturMaguntia", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            border: 2px solid black;
+            text-align: center;
+            background: linear-gradient(135deg, #ff6f61, #ffa07a);
+            color: #fff;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header h1 span {
+            color: #ffe600;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .hero-header {
+            animation: slideIn 2s ease-in-out;
+            margin-top: 40px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-family: "UnifrakturMaguntia", serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffe600;
+        }
+
+        .menu-icon {
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 50%;
+            height: 100%;
+            background: #fff;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: right 0.4s ease-in-out;
+            z-index: 1100;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            list-style: none;
+            margin-top: 60px;
+        }
+
+        .sidebar ul li {
+            width: 50vw;
+            padding: 20px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 2rem;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            color: #ff6f61;
+        }
+
+        .close-btn {
+            font-size: 1.8rem;
+            cursor: pointer;
+            float: right;
+            color: #000;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            z-index: 1050;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 70%;
+            }
+
+            .close-btn {
+                color: black;
+            }
+        }
+
+        @media ((min-width: 600px) and (max-width: 768px)) {
+            .sidebar {
+                width: 50%;
+            }
+
+            .close-btn {
+                color: black;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            background: url('https://static.wixstatic.com/media/2e2a49_649ed07c96b8440ca201c9128c0898ae~mv2.jpg') no-repeat center center/cover;
+            color: #fff;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn-enroll {
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0px 4px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        .btn-enroll:hover {
+            background: #ff4500;
+            transform: scale(1.1);
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 20px;
+            background: #fff;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feature {
+            text-align: center;
+            max-width: 300px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            flex: 1 1 300px;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #6E48AA;
+        }
+
+        .feature p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .login-container {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: right 0.4s ease-in-out;
+            z-index: 1100;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container.active {
+            right: 0;
+        }
+
+        .login-box {
+            width: 80%;
+            max-width: 400px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-box button:hover {
+            background: #e65a50;
+        }
+
+        .close-btn {
+            font-size: 1.8rem;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            z-index: 1050;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        @media screen and (max-width: 768px) {
+            .login-container {
+                width: 50%;
+            }
+        }
+
+        .login-signup {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.4rem;
+        }
+
+        .login-signup button {
+            text-decoration: none;
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0px 4px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        .login-signup button:hover {
+            background: #ff4500;
+            transform: scale(1.1);
+            transition: all 0.9s;
+            letter-spacing: 0.1em;
+        }
+
+        .login-signup a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">📚 Online Academy</div>
+            <div class="menu-icon">&#9776;</div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <span class="close-btn">&times;</span>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Contact</a></li>
+                <div class="login-signup">
+                    <button class="menu-icon" id="open-login">🔑</button>
+                    <button><a href="/signup">Signup</a></button>
+                </div>
+            </ul>
+        </div>
+
+        <div class="hero-header">
+            <h1>Welcome to <span>School Name</span></h1>
+            <p>Your Gateway to Quality Online Education</p>
+        </div>
+    </header>
+
+    <div class="login-container" id="login-form">
+        <span class="close-btn" id="close-login">&times;</span>
+        <div class="login-box">
+            <h2>Login</h2>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button>Login</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Learn Anytime, Anywhere</h2>
+            <p>Join our online classes and get access to expert teachers, live sessions, and recorded lectures.</p>
+            <button class="btn-enroll">🚀 Enroll Now</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <h3>Live Classes</h3>
+            <p>Interactive live sessions with expert teachers.</p>
+        </div>
+        <div class="feature">
+            <h3>Recorded Lectures</h3>
+            <p>Access recorded lectures anytime for revision.</p>
+        </div>
+        <div class="feature">
+            <h3>Flexible Timings</h3>
+            <p>Learn at your own pace and schedule.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 School Name. All rights reserved.</p>
+    </footer>
+
+    <div class="overlay"></div>
+
+    <script>
+        const menuIcon = document.querySelector('.menu-icon');
+        const sidebar = document.querySelector('.sidebar');
+        const closeBtn = document.querySelector('.close-btn');
+        const openLogin = document.getElementById('open-login');
+        const loginForm = document.getElementById('login-form');
+        const closeLogin = document.getElementById('close-login');
+        const overlay = document.querySelector('.overlay');
+
+        menuIcon.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        openLogin.addEventListener('click', () => {
+            loginForm.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        closeLogin.addEventListener('click', () => {
+            loginForm.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            loginForm.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    </script>
+
+
+
+</body>
+
+</html>
