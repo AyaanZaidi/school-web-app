@@ -13,6 +13,7 @@ import RecordedLectures from "./component/RecordLectures";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import Dashboard from "./pages/dashboard/DashBoard";
+import ImageSlider from "./component/ImageSlider";
 
 function App() {
   const location = useLocation(); // Current page ka path get karne ke liye
@@ -48,6 +49,7 @@ function App() {
           <Route path="/liveClasses" element={<Liveclasses />} />
           <Route path="/recorded-lectures" element={<RecordedLectures />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/slider" element={<ImageSlider />} />
         </Routes>
       </div>
 
